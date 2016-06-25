@@ -32,42 +32,27 @@ public class OilerNumberComputer {
     }
 
     public void computeE() throws InterruptedException {
-        long startTime = System.currentTimeMillis();
-
-        int piece = (int) Math.ceil(new Double(numberOfIterations) / numberOfThreads);
-        int remaining = numberOfIterations - piece * (numberOfThreads - 1);
-
         ArrayList<MyThread> threads = new ArrayList<MyThread>();
 
-        for (int i = 0; i < numberOfThreads - 1; ++i) {
-            MyThread thread = new MyThread(i * piece, i * piece + piece, i + 1);
+        for (int i = 0; i < numberOfThreads; ++i) {
+            MyThread thread = new MyThread(i, numberOfThreads, i + 1);
             threads.add(thread);
             thread.start();
         }
 
-        MyThread thread = new MyThread(numberOfIterations - remaining, numberOfIterations,
-                numberOfThreads);
-        thread.start();
-        threads.add(thread);
-
-        for (int i = 0; i < threads.size(); ++i) {
-            threads.get(i).join();
+        for (MyThread thread : threads) {
+            thread.join();
         }
-
-        long endTime   = System.currentTimeMillis();
-        double totalTimeInMills = (endTime - startTime) / 1000.0;
-        System.out.println("The program finished in " + totalTimeInMills + " second(s) with " + 2 +
-                " threads. ");
     }
 
     private class MyThread extends Thread {
-        private final int end;
+        private final int step;
         private final int start;
         private final int number;
 
         public MyThread(int start, int end, int number) {
             this.start = start;
-            this.end = end;
+            this.step = end;
             this.number = number;
         }
 
@@ -77,7 +62,7 @@ public class OilerNumberComputer {
 
             BigDecimal currentResult = BigDecimal.ZERO;
 
-            for (int i = start; i < end; ++i) {
+            for (int i = start; i < numberOfIterations; i += step) {
                 currentResult = currentResult.add(computationalFunction(i));
             }
 

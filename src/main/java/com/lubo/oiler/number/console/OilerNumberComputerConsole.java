@@ -31,8 +31,5 @@ public class OilerNumberComputerConsole {
     private void parseArgs() {
         numberOfIterations = Integer.parseInt(args[1]);
         numberOfThreads = Integer.parseInt(args[0]);
-
- //       numberOfIterations = 1000;
-//        numberOfThreads = 3;
     }
 }
