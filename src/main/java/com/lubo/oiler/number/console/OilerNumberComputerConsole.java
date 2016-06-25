@@ -11,17 +11,28 @@ public class OilerNumberComputerConsole {
         this.args = args;
     }
 
-    public void run() throws InterruptedException {
+    public void compute() throws InterruptedException {
+        long startTime = System.currentTimeMillis();
+
         parseArgs();
         OilerNumberComputer oilerNumberComputer = new OilerNumberComputer(numberOfIterations,
                 numberOfThreads);
         oilerNumberComputer.computeE();
 
-        System.out.println(oilerNumberComputer.getE());
+        System.out.println("Oiler number e = " + oilerNumberComputer.getE());
+
+        long endTime   = System.currentTimeMillis();
+        double totalTimeInMills = (endTime - startTime) / 1000.0;
+        System.out.println("The program finished in " + totalTimeInMills + " second(s) with " +
+                numberOfThreads +
+                " threads. ");
     }
 
     private void parseArgs() {
-        numberOfIterations = 10000;
-        numberOfThreads = 1;
+        numberOfIterations = Integer.parseInt(args[1]);
+        numberOfThreads = Integer.parseInt(args[0]);
+
+ //       numberOfIterations = 1000;
+//        numberOfThreads = 3;
     }
 }

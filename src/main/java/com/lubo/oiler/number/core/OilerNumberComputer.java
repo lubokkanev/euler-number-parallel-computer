@@ -16,7 +16,7 @@ public class OilerNumberComputer {
         this.numberOfIterations = numberOfIterations;
         this.numberOfThreads = numberOfThreads;
         preCalculatedFactorials = new ArrayList<BigInteger>(3 * numberOfIterations + 1);
-        preCalculateFactorials();
+        //preCalculateFactorials();
     }
 
     private void preCalculateFactorials() {
@@ -32,6 +32,8 @@ public class OilerNumberComputer {
     }
 
     public void computeE() throws InterruptedException {
+        long startTime = System.currentTimeMillis();
+
         int piece = (int) Math.ceil(new Double(numberOfIterations) / numberOfThreads);
         int remaining = numberOfIterations - piece * (numberOfThreads - 1);
 
@@ -51,6 +53,11 @@ public class OilerNumberComputer {
         for (int i = 0; i < threads.size(); ++i) {
             threads.get(i).join();
         }
+
+        long endTime   = System.currentTimeMillis();
+        double totalTimeInMills = (endTime - startTime) / 1000.0;
+        System.out.println("The program finished in " + totalTimeInMills + " second(s) with " + 2 +
+                " threads. ");
     }
 
     private class MyThread extends Thread {
@@ -88,13 +95,14 @@ public class OilerNumberComputer {
     }
 
     private BigDecimal computationalFunction(int k) {
-        return BigDecimal.valueOf(Math.pow(3 * k, 2) + 1).divide(factorial(3 * k), 20, RoundingMode.CEILING);
+        return BigDecimal.valueOf(Math.pow(3 * k, 2) + 1).divide(factorialSlow(3 * k), 20,
+                RoundingMode.CEILING);
     }
 
     private BigDecimal factorialSlow(int n) {
         BigDecimal result = BigDecimal.ONE;
 
-        for (int i = 2; i < n; ++i) {
+        for (int i = 2; i <= n; ++i) {
             result = result.multiply(BigDecimal.valueOf(i));
         }
 
