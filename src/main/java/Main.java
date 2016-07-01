@@ -1,7 +1,7 @@
-import com.lubo.oiler.number.console.OilerNumberComputerConsole;
+import com.lubokkanev.euler.number.console.EulerNumberComputerConsole;
 
 public class Main {
-    public static void main(String[] args) throws InterruptedException {
-        new OilerNumberComputerConsole(args).compute();
+    public static void main(String[] args) {
+        new EulerNumberComputerConsole(args).run();
     }
 }
