@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
+import static com.lubokkanev.euler.number.core.Defaults.*;
+
 public class EulerNumberComputer {
     private BigDecimal e = new BigDecimal(0);
 
@@ -14,18 +16,13 @@ public class EulerNumberComputer {
     private final int NUMBER_OF_THREADS;
     private final boolean IN_QUIET_MODE;
 
-    private static final int DEFAULT_NUMBER_OF_DIGITS = 300;
-    private static final int DEFAULT_NUMBER_OF_ITERATIONS = 2000;
-    private static final int DEFAULT_NUMBER_OF_THREADS = 2;
-    private static final boolean DEFAULT_QUIET_MODE_STATE = false;
-
     public EulerNumberComputer(Integer numberOfIterations, Integer numberOfThreads, Boolean
             inQuietMode, Integer numberOfDigits) {
-        NUMBER_OF_DIGITS = numberOfDigits == null ? DEFAULT_NUMBER_OF_DIGITS :
+        NUMBER_OF_DIGITS = numberOfDigits == null ? Defaults.NUMBER_OF_DIGITS :
                 numberOfDigits;
-        NUMBER_OF_ITERATIONS = numberOfIterations == null ? DEFAULT_NUMBER_OF_ITERATIONS : numberOfIterations;
-        NUMBER_OF_THREADS = numberOfThreads == null ? DEFAULT_NUMBER_OF_THREADS : numberOfThreads;
-        IN_QUIET_MODE = inQuietMode == null ? DEFAULT_QUIET_MODE_STATE : inQuietMode;
+        NUMBER_OF_ITERATIONS = numberOfIterations == null ? Defaults.NUMBER_OF_ITERATIONS : numberOfIterations;
+        NUMBER_OF_THREADS = numberOfThreads == null ? Defaults.NUMBER_OF_THREADS : numberOfThreads;
+        IN_QUIET_MODE = inQuietMode == null ? QUIET_MODE_STATE : inQuietMode;
     }
 
     public BigDecimal getE() {

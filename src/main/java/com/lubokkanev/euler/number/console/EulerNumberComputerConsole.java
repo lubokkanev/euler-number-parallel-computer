@@ -1,5 +1,6 @@
 package com.lubokkanev.euler.number.console;
 
+import com.lubokkanev.euler.number.core.Defaults;
 import com.lubokkanev.euler.number.core.EulerNumberComputer;
 import com.lubokkanev.euler.number.util.RuntimeCalculator;
 import org.apache.commons.cli.*;
@@ -17,7 +18,7 @@ public class EulerNumberComputerConsole {
     private Integer numberOfIterations;
     private Integer numberOfThreads;
     private Boolean inQuietMode;
-    private String outputFile = "output.txt";
+    private String outputFile;
     private Printer printer = new Printer();
 
     private RuntimeCalculator runtimeCalculator = new RuntimeCalculator();
@@ -64,22 +65,32 @@ public class EulerNumberComputerConsole {
 
             if (cmd.hasOption("p")) {
                 numberOfIterations = Integer.parseInt(cmd.getOptionValue("p"));
+            } else {
+                numberOfIterations = Defaults.NUMBER_OF_ITERATIONS;
             }
 
             if (cmd.hasOption("t")) {
                 numberOfThreads = Integer.parseInt(cmd.getOptionValue("t"));
+            } else {
+                numberOfThreads = Defaults.NUMBER_OF_THREADS;
             }
 
             if (cmd.hasOption("q")) {
                 inQuietMode = true;
+            } else {
+                inQuietMode = Defaults.QUIET_MODE_STATE;
             }
 
             if (cmd.hasOption("o")) {
                 outputFile = cmd.getOptionValue("o");
+            } else {
+                outputFile = Defaults.OUTPUT_FILE;
             }
 
             if (cmd.hasOption("d")) {
                 numberOfDigits = Integer.valueOf(cmd.getOptionValue("d"));
+            } else {
+                numberOfDigits = Defaults.NUMBER_OF_DIGITS;
             }
         } catch (ParseException e) {
             System.err.println("Could not parse arguments. Using default settings. ");
@@ -94,7 +105,7 @@ public class EulerNumberComputerConsole {
             printEulerNumber();
             writeEulerNumberToFile();
 
-            if (inQuietMode == null) {
+            if (!inQuietMode) {
                 printSeparator();
                 printDigitsPrinted();
                 printThreadsUsed();
