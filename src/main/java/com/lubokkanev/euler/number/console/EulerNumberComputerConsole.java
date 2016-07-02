@@ -19,7 +19,7 @@ public class EulerNumberComputerConsole {
     private String outputFile = "output.txt";
     private Printer printer = new Printer();
 
-    private RuntimeCalculator runtimeCalculator;
+    private RuntimeCalculator runtimeCalculator = new RuntimeCalculator();
 
     public EulerNumberComputerConsole(String[] args) {
         this.args = args;
@@ -45,7 +45,7 @@ public class EulerNumberComputerConsole {
     }
 
     private void setStartTime() {
-        runtimeCalculator = new RuntimeCalculator(System.currentTimeMillis());
+        runtimeCalculator.setStartTime(System.currentTimeMillis());
     }
 
     private void parseArgs() {
@@ -80,7 +80,7 @@ public class EulerNumberComputerConsole {
         }
     }
 
-    class Printer {
+    private class Printer {
         private final String E_PRINT_MESSAGE = "The value of the Euler's number is %s. ";
 
         public void printSummary() {
