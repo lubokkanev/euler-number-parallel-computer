@@ -13,9 +13,9 @@ This project computes the Euler's number ***e*** using multithreading.
 * **-o \<filename\>**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output file.
    
 ### Defaults
-* 300 digits.
-* 2000 iterations.
-* 2 threads.
+* 10000 digits.
+* 1000 iterations.
+* 4 threads.
 * non-quiet mode - displays the gathered information of each thread. 
 * the output is saved in the file output.txt in the working directory. 
 
