@@ -127,15 +127,15 @@ public class EulerNumberComputerConsole {
         }
 
         private void printThreadsUsed() {
-            System.out.println("Used " + numberOfThreads + " threads in the current run.");
+            System.out.println("Used " + numberOfThreads + " threads.");
         }
 
         private void printIterationsDone() {
-            System.out.println("Did " + numberOfIterations + " iterations in the current run.");
+            System.out.println("Did " + numberOfIterations + " iterations.");
         }
 
         private void printTotalTime() {
-            System.out.println("The total execution time for current run was " +
+            System.out.println("The total execution time was " +
                     runtimeCalculator.getRuntimeInSeconds() + " seconds.");
         }
 
