@@ -6,12 +6,14 @@ This project computes the Euler's number ***e*** using multithreading.
 
 ## Usage
 ### Flags
+* **-d \<number\>**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number of digits.
 * **-p \<number\>**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number of iterations.
 * **-t \<number\>**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;number of threads.
 * **-q**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;quiet mode.
 * **-o \<filename\>**&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;output file.
    
 ### Defaults
+* 300 digits.
 * 2000 iterations.
 * 2 threads.
 * non-quiet mode - displays the gathered information of each thread. 

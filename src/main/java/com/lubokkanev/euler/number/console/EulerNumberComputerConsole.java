@@ -13,6 +13,7 @@ public class EulerNumberComputerConsole {
 
     private EulerNumberComputer eulerNumberComputer;
 
+    private Integer numberOfDigits;
     private Integer numberOfIterations;
     private Integer numberOfThreads;
     private Boolean inQuietMode;
@@ -35,7 +36,7 @@ public class EulerNumberComputerConsole {
 
     private void computeEulerNumber() {
         eulerNumberComputer = new EulerNumberComputer(numberOfIterations, numberOfThreads,
-                inQuietMode);
+                inQuietMode, numberOfDigits);
 
         eulerNumberComputer.computeE();
     }
@@ -52,6 +53,7 @@ public class EulerNumberComputerConsole {
         DefaultParser parser = new DefaultParser();
         Options options = new Options();
 
+        options.addOption("d", true, "number of digits");
         options.addOption("p", true, "number of iterations");
         options.addOption("t", "tasks", true, "number of parallel tasks");
         options.addOption("q", false, "quiet mode");
@@ -75,6 +77,10 @@ public class EulerNumberComputerConsole {
             if (cmd.hasOption("o")) {
                 outputFile = cmd.getOptionValue("o");
             }
+
+            if (cmd.hasOption("d")) {
+                numberOfDigits = Integer.valueOf(cmd.getOptionValue("d"));
+            }
         } catch (ParseException e) {
             System.err.println("Could not parse arguments. Using default settings. ");
         }
@@ -90,10 +96,15 @@ public class EulerNumberComputerConsole {
 
             if (inQuietMode == null) {
                 printSeparator();
+                printDigitsPrinted();
                 printThreadsUsed();
                 printIterationsDone();
                 printTotalTime();
             }
+        }
+
+        private void printDigitsPrinted() {
+            System.out.println("Printed " + numberOfDigits + " digits. ");
         }
 
         private void printSeparator() {

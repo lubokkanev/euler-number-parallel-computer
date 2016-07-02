@@ -7,19 +7,22 @@ import java.math.RoundingMode;
 import java.util.ArrayList;
 
 public class EulerNumberComputer {
-    private static final int NUMBER_OF_DIGITS = 1000;
     private BigDecimal e = new BigDecimal(0);
 
+    private final int NUMBER_OF_DIGITS;
     private final int NUMBER_OF_ITERATIONS;
     private final int NUMBER_OF_THREADS;
     private final boolean IN_QUIET_MODE;
 
-    private final int DEFAULT_NUMBER_OF_ITERATIONS = 2000;
-    private final int DEFAULT_NUMBER_OF_THREADS = 2;
-    private final boolean DEFAULT_QUIET_MODE_STATE = false;
+    private static final int DEFAULT_NUMBER_OF_DIGITS = 300;
+    private static final int DEFAULT_NUMBER_OF_ITERATIONS = 2000;
+    private static final int DEFAULT_NUMBER_OF_THREADS = 2;
+    private static final boolean DEFAULT_QUIET_MODE_STATE = false;
 
     public EulerNumberComputer(Integer numberOfIterations, Integer numberOfThreads, Boolean
-            inQuietMode) {
+            inQuietMode, Integer numberOfDigits) {
+        NUMBER_OF_DIGITS = numberOfDigits == null ? DEFAULT_NUMBER_OF_DIGITS :
+                numberOfDigits;
         NUMBER_OF_ITERATIONS = numberOfIterations == null ? DEFAULT_NUMBER_OF_ITERATIONS : numberOfIterations;
         NUMBER_OF_THREADS = numberOfThreads == null ? DEFAULT_NUMBER_OF_THREADS : numberOfThreads;
         IN_QUIET_MODE = inQuietMode == null ? DEFAULT_QUIET_MODE_STATE : inQuietMode;
