@@ -6,7 +6,7 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 
-import static com.lubokkanev.euler.number.core.Defaults.*;
+import static com.lubokkanev.euler.number.core.Defaults.QUIET_MODE_STATE;
 
 public class EulerNumberComputer {
     private BigDecimal e = new BigDecimal(0);
@@ -16,10 +16,8 @@ public class EulerNumberComputer {
     private final int NUMBER_OF_THREADS;
     private final boolean IN_QUIET_MODE;
 
-    public EulerNumberComputer(Integer numberOfIterations, Integer numberOfThreads, Boolean
-            inQuietMode, Integer numberOfDigits) {
-        NUMBER_OF_DIGITS = numberOfDigits == null ? Defaults.NUMBER_OF_DIGITS :
-                numberOfDigits;
+    public EulerNumberComputer(Integer numberOfIterations, Integer numberOfThreads, Boolean inQuietMode, Integer numberOfDigits) {
+        NUMBER_OF_DIGITS = numberOfDigits == null ? Defaults.NUMBER_OF_DIGITS : numberOfDigits;
         NUMBER_OF_ITERATIONS = numberOfIterations == null ? Defaults.NUMBER_OF_ITERATIONS : numberOfIterations;
         NUMBER_OF_THREADS = numberOfThreads == null ? Defaults.NUMBER_OF_THREADS : numberOfThreads;
         IN_QUIET_MODE = inQuietMode == null ? QUIET_MODE_STATE : inQuietMode;
@@ -48,8 +46,7 @@ public class EulerNumberComputer {
     }
 
     private BigDecimal computationalFunction(int k) {
-        return BigDecimal.valueOf(Math.pow(3 * k, 2) + 1).divide(factorial(3 * k), NUMBER_OF_DIGITS,
-                RoundingMode.CEILING);
+        return BigDecimal.valueOf(Math.pow(3 * k, 2) + 1).divide(factorial(3 * k), NUMBER_OF_DIGITS, RoundingMode.HALF_EVEN);
     }
 
     private BigDecimal factorial(int n) {
@@ -101,8 +98,7 @@ public class EulerNumberComputer {
 
         private void printThreadRunningTime() {
             if (!inQuietMode) {
-                System.out.println("Thread " + threadNumber + " execution time was " +
-                        runtimeCalculator.getRuntimeInSeconds() + " " + "seconds.");
+                System.out.println("Thread " + threadNumber + " execution time was " + runtimeCalculator.getRuntimeInSeconds() + " " + "seconds.");
             }
         }
 
@@ -127,3 +123,4 @@ public class EulerNumberComputer {
         }
     }
 }
+

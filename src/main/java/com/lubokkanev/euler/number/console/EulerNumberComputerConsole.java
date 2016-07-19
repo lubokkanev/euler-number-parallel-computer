@@ -3,7 +3,10 @@ package com.lubokkanev.euler.number.console;
 import com.lubokkanev.euler.number.core.Defaults;
 import com.lubokkanev.euler.number.core.EulerNumberComputer;
 import com.lubokkanev.euler.number.util.RuntimeCalculator;
-import org.apache.commons.cli.*;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import java.io.FileNotFoundException;
 import java.io.PrintWriter;
@@ -36,8 +39,7 @@ public class EulerNumberComputerConsole {
     }
 
     private void computeEulerNumber() {
-        eulerNumberComputer = new EulerNumberComputer(numberOfIterations, numberOfThreads,
-                inQuietMode, numberOfDigits);
+        eulerNumberComputer = new EulerNumberComputer(numberOfIterations, numberOfThreads, inQuietMode, numberOfDigits);
 
         eulerNumberComputer.computeE();
     }
@@ -87,7 +89,7 @@ public class EulerNumberComputerConsole {
                 outputFile = Defaults.OUTPUT_FILE;
             }
 
-            if (cmd.hasOption("d")) {
+            if (cmd.hasOption("d") && validNumberOfDigits(Integer.valueOf(cmd.getOptionValue("d")))) {
                 numberOfDigits = Integer.valueOf(cmd.getOptionValue("d"));
             } else {
                 numberOfDigits = Defaults.NUMBER_OF_DIGITS;
@@ -95,6 +97,10 @@ public class EulerNumberComputerConsole {
         } catch (ParseException e) {
             System.err.println("Could not parse arguments. Using default settings. ");
         }
+    }
+
+    private boolean validNumberOfDigits(int numberOfDigits) {
+        return numberOfDigits >= 0;
     }
 
     private class Printer {
@@ -135,12 +141,11 @@ public class EulerNumberComputerConsole {
         }
 
         private void printTotalTime() {
-            System.out.println("The total execution time was " +
-                    runtimeCalculator.getRuntimeInSeconds() + " seconds.");
+            System.out.println("The total execution time was " + runtimeCalculator.getRuntimeInSeconds() + " seconds.");
         }
 
         private void writeEulerNumberToFile() {
-            try (PrintWriter writer = new PrintWriter(outputFile, "UTF-8")){
+            try (PrintWriter writer = new PrintWriter(outputFile, "UTF-8")) {
                 writer.println(String.format(E_PRINT_MESSAGE, eulerNumberComputer.getE()));
             } catch (FileNotFoundException | UnsupportedEncodingException e) {
                 System.err.println("Could not create the output  file. ");
