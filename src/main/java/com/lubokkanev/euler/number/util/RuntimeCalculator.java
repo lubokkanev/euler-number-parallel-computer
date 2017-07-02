@@ -4,10 +4,6 @@ public class RuntimeCalculator {
     private long startTime;
     private long endTime;
 
-    public RuntimeCalculator() {
-
-    }
-
     public RuntimeCalculator(long startTime) {
         this.startTime = startTime;
     }
